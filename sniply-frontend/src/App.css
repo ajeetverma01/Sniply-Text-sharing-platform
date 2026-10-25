@@ -1,0 +1,244 @@
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #0b0f14;
+  color: #e6edf3;
+  font-family: Arial, sans-serif;
+}
+
+button,
+textarea {
+  font: inherit;
+}
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.navbar {
+  height: 76px;
+  padding: 0 8%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #222b36;
+}
+
+.logo {
+  margin: 0;
+  color: #00d9ff;
+  font-size: 27px;
+}
+
+.tagline {
+  color: #8b98a7;
+  font-size: 14px;
+}
+
+.main {
+  width: min(900px, 90%);
+  margin: 70px auto;
+  flex: 1;
+}
+
+.hero {
+  margin-bottom: 32px;
+}
+
+.hero h2 {
+  margin: 0 0 12px;
+  font-size: clamp(30px, 5vw, 44px);
+}
+
+.hero p {
+  color: #9ba7b4;
+  line-height: 1.6;
+}
+
+.paste-card {
+  padding: 22px;
+  background: #111820;
+  border: 1px solid #273340;
+  border-radius: 12px;
+}
+
+.paste-card label {
+  display: block;
+  margin-bottom: 14px;
+  font-weight: 600;
+}
+
+.paste-card textarea {
+  width: 100%;
+  min-height: 280px;
+  padding: 16px;
+  resize: vertical;
+  background: #0b1118;
+  color: #e6edf3;
+  border: 1px solid #2b3745;
+  border-radius: 8px;
+  outline: none;
+  line-height: 1.6;
+}
+
+.paste-card textarea:focus {
+  border-color: #00d9ff;
+}
+
+.paste-actions {
+  margin-top: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.paste-actions span {
+  color: #8b98a7;
+  font-size: 13px;
+}
+
+.paste-actions button {
+  padding: 12px 20px;
+  background: #00d9ff;
+  color: #071117;
+  border: none;
+  border-radius: 7px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.paste-actions button:hover {
+  background: #62e7ff;
+}
+
+.footer {
+  padding: 24px;
+  color: #738091;
+  text-align: center;
+  border-top: 1px solid #222b36;
+  font-size: 13px;
+}
+
+@media (max-width: 600px) {
+  .navbar {
+    padding: 0 5%;
+  }
+
+  .main {
+    margin: 45px auto;
+  }
+
+  .paste-card {
+    padding: 15px;
+  }
+
+  .paste-actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .paste-actions button {
+    width: 100%;
+  }
+}
+
+.error-message {
+  color: #ff7b72;
+  margin-top: 16px;
+  font-size: 14px;
+}
+
+.success-message {
+  margin-top: 20px;
+  padding: 16px;
+  border: 1px solid #245b49;
+  border-radius: 8px;
+  background: #10241e;
+  overflow-wrap: anywhere;
+}
+
+.success-message p {
+  margin-top: 0;
+  color: #7ee2b8;
+}
+
+.success-message a {
+  color: #00d9ff;
+}
+
+.paste-actions button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+
+.paste-content {
+  margin: 0;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font-family: Consolas, Monaco, monospace;
+  line-height: 1.7;
+  color: #e6edf3;
+}
+
+.share-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.share-link a {
+  flex: 1;
+  min-width: 0;
+  overflow-wrap: anywhere;
+  color: #00e0ff;
+}
+
+.share-link button {
+  flex-shrink: 0;
+}
+
+@media (max-width: 600px) {
+  .share-link {
+    align-items: stretch;
+    flex-direction: column;
+  }
+}
+
+.expiration-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.expiration-field select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #333b4d;
+  border-radius: 8px;
+  background: #151b28;
+  color: #ffffff;
+  font: inherit;
+}
+.back-link {
+  display: inline-block;
+  margin-top: 12px;
+  color: #00e0ff;
+  text-decoration: none;
+}
+
+.back-link:hover {
+  text-decoration: underline;
+}
+.char-limit {
+  color: #ff6b6b;
+}
