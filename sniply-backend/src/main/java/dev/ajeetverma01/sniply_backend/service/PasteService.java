@@ -3,7 +3,9 @@ package dev.ajeetverma01.sniply_backend.service;
 
 import dev.ajeetverma01.sniply_backend.entity.Paste;
 import dev.ajeetverma01.sniply_backend.repository.PasteRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.security.SecureRandom;
 import java.time.Instant;
@@ -26,6 +28,12 @@ public class PasteService {
     }
 
     public Paste createPaste(String content, Instant expiresAt) {
+        if (expiresAt != null && !expiresAt.isAfter(Instant.now())) {
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST,
+                    "Expiration time must be in the future"
+            );
+        }
         String id = generateUniqueId();
 
         Paste paste = new Paste(id, content, expiresAt);
@@ -68,4 +76,11 @@ public class PasteService {
 
         return id;
     }
+
+
+
+    public void deleteExpiredPastes() {
+        pasteRepository.deleteByExpiresAtBefore(Instant.now());
+    }
+
 }
