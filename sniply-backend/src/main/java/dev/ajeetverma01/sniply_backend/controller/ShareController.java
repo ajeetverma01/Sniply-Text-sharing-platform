@@ -64,8 +64,8 @@ public class ShareController {
                         HttpStatus.NOT_FOUND, "Paste not found"
                 ));
 
-        String shareableUrl = "http://localhost:8080/p/" + paste.getId();
-
+        String shareableUrl =
+                "https://sniply-beta.vercel.app/p/" + paste.getId();
         PasteResponse response = new PasteResponse(
                 paste.getId(),
                 paste.getContent(),

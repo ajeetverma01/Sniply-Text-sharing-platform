@@ -32,8 +32,8 @@ public class PasteController {
                 request.expiresAt()
         );
 
-        String shareableUrl = "http://localhost:8080/p/" + paste.getId();
-
+        String shareableUrl =
+                "https://sniply-beta.vercel.app/p/" + paste.getId();
         PasteResponse response = new PasteResponse(
                 paste.getId(),
                 paste.getContent(),
@@ -58,8 +58,8 @@ public class PasteController {
                         )
                 );
 
-        String shareableUrl = "http://localhost:8080/p/" + paste.getId();
-
+        String shareableUrl =
+                "https://sniply-beta.vercel.app/p/" + paste.getId();
         PasteResponse response = new PasteResponse(
                 paste.getId(),
                 paste.getContent(),
