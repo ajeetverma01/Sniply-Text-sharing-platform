@@ -9,6 +9,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.security.SecureRandom;
 import java.time.Instant;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -83,6 +84,21 @@ public class PasteService {
     @Transactional
     public void deleteExpiredPastes() {
         pasteRepository.deleteByExpiresAtBefore(Instant.now());
+    }
+
+
+    public List<Paste> getAllAvailablePastes() {
+        return pasteRepository
+                .findByExpiresAtIsNullOrExpiresAtAfter(Instant.now());
+    }
+
+    public boolean deletePasteById(String id) {
+        if (!pasteRepository.existsById(id)) {
+            return false;
+        }
+
+        pasteRepository.deleteById(id);
+        return true;
     }
 
 }
