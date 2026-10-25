@@ -10,6 +10,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/admin/pastes")
 // Just for testing purposes. Anyone can get all snippets haha i know
+// If you are reading this, just let me know that you are here
 public class AdminController {
 
     private final PasteService pasteService;
