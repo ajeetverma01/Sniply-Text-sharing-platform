@@ -1,7 +1,38 @@
 import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
-import axios from 'axios'
-import { Link } from 'react-router-dom'
+import api from './api/axios'
+import { Link, useParams } from 'react-router-dom'
+
+const SOCIALS = {
+    github: 'https://github.com/ajeetverma01',
+    linkedin: 'https://www.linkedin.com/in/ajeetverma01',
+    portfolio: 'https://ajeetverma.netlify.app',
+}
+
+function Footer() {
+    return (
+        <footer className="footer">
+            <p className="footer-credit">
+                Made with <span className="heart">♥</span> by <strong>Ajeet Verma</strong>
+            </p>
+            <div className="socials">
+                <a href={SOCIALS.github} target="_blank" rel="noreferrer">GitHub</a>
+                <a href={SOCIALS.linkedin} target="_blank" rel="noreferrer">LinkedIn</a>
+                <a href={SOCIALS.portfolio} target="_blank" rel="noreferrer">Portfolio</a>
+            </div>
+            <p className="footer-small">© {new Date().getFullYear()} Sniply. Share text. Share code.</p>
+        </footer>
+    )
+}
+
+function Background() {
+    return (
+        <div className="aurora" aria-hidden="true">
+            <span className="blob blob-1" />
+            <span className="blob blob-2" />
+            <span className="blob blob-3" />
+        </div>
+    )
+}
 
 function SharePaste() {
     const { id } = useParams()
@@ -17,9 +48,7 @@ function SharePaste() {
                 setLoading(true)
                 setError('')
 
-                const response = await axios.get(
-                    `http://localhost:8080/api/pastes/${id}`
-                )
+                const response = await api.get(`/api/pastes/${id}`)
 
                 setPaste(response.data)
             } catch (err) {
@@ -35,15 +64,30 @@ function SharePaste() {
     }, [id])
 
     if (loading) {
-        return <main className="main">Loading paste...</main>
+        return (
+            <div className="app">
+                <Background />
+                <main className="main center-state">
+                    <div className="spinner" aria-hidden="true" />
+                    <p>Loading paste...</p>
+                </main>
+            </div>
+        )
     }
 
-    if (error) {
+    if (error && !paste) {
         return (
-            <main className="main">
-                <h1>Sniply</h1>
-                <p className="error-message">{error}</p>
-            </main>
+            <div className="app">
+                <Background />
+                <main className="main center-state">
+                    <Link to="/" className="logo">
+                        <span className="logo-mark">&lt;/&gt;</span> Sniply
+                    </Link>
+                    <p className="error-message">{error}</p>
+                    <Link to="/" className="back-link">← Create a new paste</Link>
+                </main>
+                <Footer />
+            </div>
         )
     }
 
@@ -62,35 +106,46 @@ function SharePaste() {
 
     return (
         <div className="app">
+            <Background />
+
             <header className="navbar">
-                <h1 className="logo">Sniply</h1>
+                <Link to="/" className="logo">
+                    <span className="logo-mark">&lt;/&gt;</span> Sniply
+                </Link>
                 <span className="tagline">Share text. Share code.</span>
             </header>
 
             <main className="main">
                 <section className="hero">
-                    <h2>Your snippet</h2>
-                    <p>Shared with Sniply.</p>
-
+                    <h2>
+                        Your <span className="gradient-text">snippet</span>
+                    </h2>
+                    <p>Shared with Sniply. Copy it, use it, make it yours.</p>
                 </section>
 
                 <section className="paste-card">
                     <div className="paste-actions">
-                        <span>Shared snippet</span>
+                        <span className="window-dots" aria-hidden="true">
+                            <i /><i /><i />
+                        </span>
+                        <span className="char-count">Shared snippet</span>
 
-                        <button type="button" onClick={handleCopyContent}>
+                        <button type="button" className="btn-primary" onClick={handleCopyContent}>
                             {copied ? 'Copied!' : 'Copy Content'}
                         </button>
                     </div>
 
+                    {error && <p className="error-message">{error}</p>}
+
                     <pre className="paste-content">{paste.content}</pre>
                 </section>
+
                 <Link to="/" className="back-link">
                     ← Create another paste
                 </Link>
             </main>
 
-            <footer className="footer">Built with Sniply</footer>
+            <Footer />
         </div>
     )
 }

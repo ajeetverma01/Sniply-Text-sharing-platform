@@ -15,6 +15,7 @@ import java.net.URI;
 
 @RestController
 @RequestMapping("/api/pastes")
+@CrossOrigin(origins = "http://localhost:5173")
 public class PasteController {
 
     private final PasteService pasteService;

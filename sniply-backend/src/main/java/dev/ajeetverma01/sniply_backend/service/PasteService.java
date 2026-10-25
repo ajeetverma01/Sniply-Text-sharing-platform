@@ -10,6 +10,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.security.SecureRandom;
 import java.time.Instant;
 import java.util.Optional;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class PasteService {
@@ -79,6 +80,7 @@ public class PasteService {
 
 
 
+    @Transactional
     public void deleteExpiredPastes() {
         pasteRepository.deleteByExpiresAtBefore(Instant.now());
     }
